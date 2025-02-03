@@ -5,7 +5,7 @@ import Title from "../Components/Title";
 import ProductItem from "../Components/ProductItem";
 
 function Collection() {
-  const { products } = useContext(ShopContext);
+  const { products, search, showSearch } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -37,6 +37,12 @@ function Collection() {
   const applyFilter = () => {
     let productsCopy = products.slice();
 
+    if (showSearch && search) {
+      productsCopy = productsCopy.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
     if (category.length > 0) {
       productsCopy = productsCopy.filter((item) =>
         category.includes(item.category)
@@ -58,32 +64,29 @@ function Collection() {
     let fpCopy = filterProducts.slice();
 
     switch (sortType) {
-      case "low-high" :
-        setFilterProducts(fpCopy.sort((a,b) => (a.price - b.price)));
+      case "low-high":
+        setFilterProducts(fpCopy.sort((a, b) => a.price - b.price));
         break;
 
-      case "high-low" :
-        setFilterProducts(fpCopy.sort((a,b) => (b.price - a.price)));
+      case "high-low":
+        setFilterProducts(fpCopy.sort((a, b) => b.price - a.price));
         break;
 
       default:
         applyFilter();
         break;
     }
-  }
-
+  };
 
   // Lunch Filter Functions
 
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory]);
+  }, [category, subCategory, search, showSearch]);
 
   useEffect(() => {
     sortProduct();
   }, [sortType]);
-
-
 
   return (
     <section className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t">
@@ -195,7 +198,10 @@ function Collection() {
 
           {/* Product Sort */}
 
-          <select onChange={(e) => setSortType(e.target.value)} className="border-2 border-gray-300 text-sm px-2">
+          <select
+            onChange={(e) => setSortType(e.target.value)}
+            className="border-2 border-gray-300 text-sm px-2"
+          >
             <option value="relavent">Relavent</option>
             <option value="low-high">Low to high</option>
             <option value="high-low">High to low</option>

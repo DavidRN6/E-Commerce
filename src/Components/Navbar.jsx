@@ -3,11 +3,14 @@ import { FiSearch } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { BsHandbag } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
+import { ShopContext } from "../context/ShopContext";
 
 function Navbar() {
   const [visible, setVisible] = useState(false);
+
+  const { setShowSearch } = useContext(ShopContext);
 
   return (
     <div className="flex justify-between items-center py-5 font-medium text:logo">
@@ -40,13 +43,24 @@ function Navbar() {
       </ul>
 
       {/*========
-        icons 
-      ===========*/}
+        Icons
+      =========*/}
 
       <div className="flex items-center gap-6">
-        <span className="text-2xl cursor-pointer">
+        {/*========
+          Search
+        =========*/}
+
+        <span
+          onClick={() => setShowSearch(true)}
+          className="text-2xl cursor-pointer"
+        >
           <FiSearch />
         </span>
+
+        {/*========
+          Profile
+        ===========*/}
 
         <div className="group relative">
           <span className="text-2xl cursor-pointer">
@@ -65,6 +79,11 @@ function Navbar() {
             </div>
           </div>
         </div>
+
+        {/*========
+          Cart
+        ===========*/}
+
         <Link to="/cart" className="relative">
           <span className="text-2xl cursor-pointer">
             <BsHandbag />
