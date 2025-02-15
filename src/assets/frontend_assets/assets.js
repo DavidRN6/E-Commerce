@@ -56,10 +56,12 @@ import p_img52 from "./p_img52.png";
 
 
 import hero_img from "./hero_img.png";
+import about_img from './about_img.png';
 
 
 export const assets = {
   hero_img,
+  about_img,
 };
 
 export const products = [

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import RelatedProducts from "../Components/RelatedProducts";
+import SizeChart from "../Components/SizeChart";
 
 function Product() {
   const { productId } = useParams();
@@ -79,6 +80,8 @@ function Product() {
               ))}
             </div>
           </div>
+
+          <SizeChart />
 
           {/* --------- Select Color ----------- */}
 

@@ -18,19 +18,12 @@ function PlaceOrder() {
 
         {/* ----------------- Inputs ------------------ */}
 
-        <div className="flex gap-3">
-          <input
-            required
-            type="text"
-            placeholder="First Name"
-            className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
-          />
-          <input
-            type="text"
-            placeholder="Last Name"
-            className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
-          />
-        </div>
+        <input
+          required
+          type="text"
+          placeholder="Full Name"
+          className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
+        />
         <input
           required
           type="number"
